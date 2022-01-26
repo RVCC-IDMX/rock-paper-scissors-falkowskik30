@@ -3,57 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Rock Paper Scissors</title>
-
-    <style>
-
-        #result {
-
-        }
-        #bid{
-            border:1px solid black;
-            margin:20px;
-            padding:20px;
-            text-align:center;
-        }
-        #bid h1 {
-            padding:0px;
-            margin:0px;
-            padding-bottom:20px;
-        }
-        #choices {
-            display:grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            padding:auto;
-        }
-        button {
-            font-size:20px;
-            font-family:Georgia;
-            padding:20px;
-        }
-
-    </style>
 
 </head>
 <body>
 
-    <div id="result">
-
-        <!-- This is where our results will go -->
-
-    </div>
+    <div class="cursor"></div>
 
     <div id="bid">
 
-        <h1>Choose:</h1>
+        <h1>MAKE YOUR MOVE</h1>
 
         <div id="choices">
 
-            <button id="rock">Rock</button>
+            <button id="rock">ROCK</button>
 
-            <button id="paper">Paper</button>
+            <button id="paper">PAPER</button>
 
-            <button id="scissors">Scissors</button>
+            <button id="scissors">SCISSORS</button>
 
         </div>
 
@@ -67,7 +35,7 @@
             When this function is called, it returns a random number from 1 to the number of sides passed to it.
         */
         function dice(sides) {
-            return Math.ceil(Math.random() * sides);
+            return Math.ceil(Math.random() * sides); 
         }
 
         /*
@@ -93,7 +61,7 @@
             //1 is rock
             //2 is paper
             //3 is scissors
-            var computerChoice;
+            var computerChoice = dice(3);
 
             //This boolean value represents if the human won
             var humanWins = false;
@@ -104,7 +72,22 @@
             //STEP 2:
             //Check to see who won and set humanWins & tied
             //You'll need to build additional if statements
-            if () {}
+            if (humanChoice == 1) {
+                if (computerChoice == 1) tied = true;
+                else if (computerChoice == 2) humanWins = false;
+                else humanWins = true;
+
+            }   else if (humanChoice == 2) {
+                if (computerChoice == 2) tied = true;
+                else if (computerChoice == 3) humanWins = false;
+                else humanWins = true;
+
+            }   else if (humanChoice == 3) {
+                if (computerChoice == 3) tied = true;
+                else if (computerChoice == 1) humanWins = false;
+                else humanWins = true;
+
+            }
 
             //STEP 3:
             //Build a string to display the results of the game
@@ -116,21 +99,37 @@
             //You may need if statements somewhere around this task
             var end;
 
+            end = `You chose ${choiceName[humanChoice - 1]} and you're opponent chose ${choiceName[computerChoice - 1]}.`;
+                if (tied) end += ` It's a tie. Play again!`;
+                else if (humanWins) end += ` You won! Let's play again!`;
+                else end += ` You lost... But would you like to play again?`;
+
             //STEP 4:
             //Reach out into the DOM with getElementById() and insert the end into the result div.
-
+            document.getElementById("result").innerHTML = end;
         }
 
         //This code links in the Rock button so that when it's clicked it fires off the game.
         document.getElementById("rock").onclick = () => {
             rockPaperScissors(1);
         };
-
+        document.getElementById("paper").onclick = () => {
+            rockPaperScissors(2);
+        };
+        document.getElementById("scissors").onclick = () => {
+            rockPaperScissors(3);
+        };
         //STEP 5:
         //Below, link up the other two buttons with an EventListener so that the user can click on them and activate the game.
 
-
     </script>
+ <script src="./app.js"></script>
+
+ <div id="result">
+
+    <!-- This is where our results will go -->
+
+</div>
     
 </body>
 </html>
